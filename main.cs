@@ -19,7 +19,7 @@ namespace Bot
     internal class Work 
     {
 
-        private static TelegramBotClient bot = new("7566820191:AAHdyTDFzjXeTASp_9ECfg-sax7fli9dfl4");
+        private static TelegramBotClient bot = new("");
         static public async Task Main()
         {
             try
