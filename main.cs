@@ -19,7 +19,7 @@ namespace Bot
     internal class Work 
     {
 
-        private static TelegramBotClient bot = new("");
+        private static TelegramBotClient bot = new("7566820191:AAHdyTDFzjXeTASp_9ECfg-sax7fli9dfl4");
         static public async Task Main()
         {
             try
@@ -67,40 +67,57 @@ namespace Bot
                 await HandleCallbackQuery(botClient, callbackQuery);
             }
         }
-        
-        
+
+
         static public async Task HandleCallbackQuery(ITelegramBotClient botClient, CallbackQuery callbackQuery)
         {
             var chatId = callbackQuery.Message.Chat.Id;
             var callbackData = callbackQuery.Data;
-            
+            var messageIdToDelete = callbackQuery.Message.MessageId;
+
             if (callbackData == "FloArt")
             {
-                await DrawButtonNext(chatId);
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawButtonFloArt(chatId);
                 await GettingUserChatId(bot);
             }
-            else if (callbackData == "Меню")
+            else if (callbackData == "Меню FloArt")
             {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
                 await botClient.SendTextMessageAsync(chatId, "Тут очень скоро будет меню кофе FloArt");
             }
-            else if (callbackData == "Восход")
-            {
-                await GettingUserChatId(bot);
-                // Обработка для кнопки "Восход"
-                await DrawButtonNext(chatId);
-            }
             else if (callbackData == "О нас")
             {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
                 // Обработка для кнопки "О нас"
                 await botClient.SendTextMessageAsync(chatId, "Тут очень скоро будет информация");
             }
-            else if (callbackData == "Место нахождения")
+            else if (callbackData == "Место нахождения FloArt")
             {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
                 // Обработка для кнопки "Место нахождения"
                 await botClient.SendTextMessageAsync(chatId, "Тут скоро будет наше место положение");
+            }
+            else if (callbackData == "Восход")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await GettingUserChatId(bot);
+                await DrawButtonVoshod(chatId);
+            }
+            else if (callbackData == "Меню 'Восход'")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await GettingUserChatId(bot);
+                await botClient.SendTextMessageAsync(chatId, "Тут очень скоро будет меню кафе 'Восход'");
+            }
+            else if (callbackData == "Место положение кафе 'Восход'")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await GettingUserChatId(bot);
+                await botClient.SendTextMessageAsync(chatId, "Тут очень скоро будет меню кафе 'Восход'");
             }
         }
 
@@ -119,19 +136,32 @@ namespace Bot
             });
             await bot.SendTextMessageAsync(chatId, "Выберите заведение", replyMarkup: keyboard1);
         }
-        static async Task DrawButtonNext(long chatId)
+        static async Task DrawButtonFloArt(long chatId)
         {
 
             var keyboard2 = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Меню")},
+                new[] {InlineKeyboardButton.WithCallbackData("Меню FloArt")},
                 new[] {InlineKeyboardButton.WithCallbackData("О нас")},
-                new[] {InlineKeyboardButton.WithCallbackData("Место нахождения")}
+                new[] {InlineKeyboardButton.WithCallbackData("Адрес FloArt")}
 
 
             });
 
             await bot.SendTextMessageAsync(chatId, "Выберите действие", replyMarkup: keyboard2);
+        }
+
+        static async Task DrawButtonVoshod(long chatId)
+        {
+            var keyboard3 = new InlineKeyboardMarkup(new[]
+            {
+                new[] {InlineKeyboardButton.WithCallbackData("Меню 'Восход'")},
+                new[] {InlineKeyboardButton.WithCallbackData("О нас")},
+                new[] {InlineKeyboardButton.WithCallbackData("Адрес 'Восход'")}
+
+
+            });
+            await bot.SendTextMessageAsync(chatId, "Выберите действие", replyMarkup: keyboard3);
         }
 
         static async Task GettingUserChatId(TelegramBotClient bot)
