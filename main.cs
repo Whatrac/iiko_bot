@@ -12,7 +12,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using System.Net.WebSockets;
+
 
 
 namespace Bot
@@ -20,30 +20,60 @@ namespace Bot
     internal class Work 
     {
 
-        private static TelegramBotClient bot = new("");
+        private static TelegramBotClient bot = new("*");
+
+        private static CancellationTokenSource cts = new CancellationTokenSource();
         static public async Task Main()
         {
             try
             {
+                // Запускаем фоновую задачу для отслеживания ESC
+                var escMonitorTask = MonitorEscapeKey(cts);
+
                 var receiverOptions = new ReceiverOptions
                 {
-                    AllowedUpdates = Array.Empty<UpdateType>() // Получаем все типы обновлений
+                    AllowedUpdates = Array.Empty<UpdateType>()
                 };
-                bot.StartReceiving
-                (
+
+                bot.StartReceiving(
                     HandleUpdateAsync,
                     HandlePollingErrorAsync,
                     receiverOptions,
-                    new CancellationToken()
+                    cts.Token
                 );
-                Console.WriteLine("Бот запущен. Нажмите Ctrl+C для остановки.");    
-                await Task.Delay(-1);
+
+                Console.WriteLine("Бот запущен. Нажмите ESC для остановки.");
+
+                await escMonitorTask;
+            }
+            catch (TaskCanceledException)
+            {
+                Console.WriteLine("Работа бота завершена.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка: {ex.Message}");
             }
+            finally
+            {
+                cts.Dispose();
+            }
         }
+
+        private static async Task MonitorEscapeKey(CancellationTokenSource cts) // смотрим нажат ли esc
+        {
+            while (!cts.Token.IsCancellationRequested)
+            {
+                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)
+                {
+                    Console.WriteLine("\nОбнаружено нажатие ESC. Остановка бота...");
+                    cts.Cancel();
+                    break;
+                }
+                await Task.Delay(100); 
+            }
+        }
+
 
         private static Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken ct)
         {
@@ -104,8 +134,7 @@ namespace Bot
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
-
-                await botClient.SendTextMessageAsync(chatId, "Тут скоро будет наше место положение");
+                await DrawPlaseFloArt(chatId);
             }
             else if (callbackData == "Восход")
             {
@@ -113,7 +142,7 @@ namespace Bot
                 await GettingUserChatId(bot);
                 await DrawButtonVoshod(chatId);
             }
-            else if (callbackData == "Меню 'Восход'")
+            else if (callbackData == "Меню Восход")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
@@ -123,7 +152,7 @@ namespace Bot
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
-                await botClient.SendTextMessageAsync(chatId, "Тут очень скоро будет место положение кафе 'Восход'");
+                await DrawPlaseVoshod(chatId);
             }
             else if (callbackData == "Вернуться к выбору ресторана")
             {
@@ -137,7 +166,7 @@ namespace Bot
                 await DrawButtonFloArt(chatId);
                 await GettingUserChatId(bot);
             }
-            else if (callbackData == "Вернутся к выбору действия(Восход)")
+            else if (callbackData == "Вернуться к выбору действия(Восход)")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
@@ -174,7 +203,7 @@ namespace Bot
         {
             var keyboard3 = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Меню 'Восход'")},
+                new[] {InlineKeyboardButton.WithCallbackData("Меню Восход")},
                 new[] {InlineKeyboardButton.WithCallbackData("Узнать больше о кофейне 'Восход'")},
                 new[] {InlineKeyboardButton.WithCallbackData("Место положение кафе 'Восход'")},
                 new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору ресторана")}
@@ -199,10 +228,10 @@ namespace Bot
             var keyboardVoshod = new InlineKeyboardMarkup(new[]
             {
                 new[] {InlineKeyboardButton.WithCallbackData("скоро тут появится меню кафе Восход")},
-                new[] {InlineKeyboardButton.WithCallbackData("Вернутся к выбору действия(Восход)")}
+                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(Восход)")}
             });
 
-            await bot.SendTextMessageAsync(chatId, "Выберите любую позицию.", replyMarkup: keyboardVoshod);
+            await bot.SendTextMessageAsync(chatId, "Выберите любую позицию", replyMarkup: keyboardVoshod);
         }
 
         static async Task DrawInfoFLoArt(long chatId)
@@ -221,9 +250,27 @@ namespace Bot
             });
             await bot.SendTextMessageAsync(chatId, "Тут очень скоро появится информация о кофейне Восход",replyMarkup: keyboardVoshodInfo);
         }
+
+        static async Task DrawPlaseFloArt(long chatId)
+        {
+            var keyboardPlaseFlo = new InlineKeyboardMarkup(new[]
+            {
+                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(FloArt)")}
+            });
+
+            await bot.SendTextMessageAsync(chatId, "Тут скоро будет место положение кофейни FLoArt", replyMarkup: keyboardPlaseFlo);
+        }
+
+        static async Task DrawPlaseVoshod(long chatId)
+        {
+            var keyboardPlaseVoshod = new InlineKeyboardMarkup(new[]
+            {
+                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(Восход)")}
+            });
+
+            await bot.SendTextMessageAsync(chatId, "Тут очень скоро будет место положение кафе Восход", replyMarkup: keyboardPlaseVoshod);
+        }
         
-
-
 
         static async Task GettingUserChatId(TelegramBotClient bot)
         {
