@@ -20,7 +20,7 @@ namespace Bot
     internal class Work 
     {
 
-        private static TelegramBotClient bot = new("*");
+        private static TelegramBotClient bot = new("");
 
         private static CancellationTokenSource cts = new CancellationTokenSource();
         static public async Task Main()
@@ -106,70 +106,70 @@ namespace Bot
             var callbackData = callbackQuery.Data;
             var messageIdToDelete = callbackQuery.Message.MessageId;
 
-            if (callbackData == "FloArt")
+            if (callbackData == "floart")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await DrawButtonFloArt(chatId);
                 await GettingUserChatId(bot);
             }
-            else if (callbackData == "Меню FloArt")
+            else if (callbackData == "menu_floart")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await DrawMenuFloArt(chatId);
                 await GettingUserChatId(bot);
             }
-            else if (callbackData == "Узнать больше о кофейне 'FloArt'")
+            else if (callbackData == "info_floart_first")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
                 await DrawInfoFLoArt(chatId);
             }
-            else if (callbackData == "Узнать больше о кофейне 'Восход'")
-            {
-                await bot.DeleteMessage(chatId, messageIdToDelete);
-                await GettingUserChatId(bot);
-                await DrawInfoVoshod(chatId);
-            }
-            else if (callbackData == "Место нахождения FloArt")
+            else if (callbackData == "place_floart_first")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
                 await DrawPlaseFloArt(chatId);
             }
-            else if (callbackData == "Восход")
-            {
-                await bot.DeleteMessage(chatId, messageIdToDelete);
-                await GettingUserChatId(bot);
-                await DrawButtonVoshod(chatId);
-            }
-            else if (callbackData == "Меню Восход")
-            {
-                await bot.DeleteMessage(chatId, messageIdToDelete);
-                await GettingUserChatId(bot);
-                await DrawMenuVoshod(chatId);
-            }
-            else if (callbackData == "Место положение кафе 'Восход'")
-            {
-                await bot.DeleteMessage(chatId, messageIdToDelete);
-                await GettingUserChatId(bot);
-                await DrawPlaseVoshod(chatId);
-            }
-            else if (callbackData == "Вернуться к выбору ресторана")
-            {
-                await bot.DeleteMessage(chatId, messageIdToDelete);
-                await DrawButtonFirst(chatId);
-                await GettingUserChatId(bot);
-            }
-            else if (callbackData == "Вернуться к выбору действия(FloArt)")
+            else if (callbackData == "floart_back")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await DrawButtonFloArt(chatId);
                 await GettingUserChatId(bot);
             }
-            else if (callbackData == "Вернуться к выбору действия(Восход)")
+            else if (callbackData == "voshod")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await GettingUserChatId(bot);
+                await DrawButtonVoshod(chatId);
+            }
+            else if (callbackData == "menu_voshod")
+            {
+                await GettingUserChatId(bot);
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawMenuVoshod(chatId);
+            }
+            else if (callbackData == "info_voshod_first")
+            {
+                await GettingUserChatId(bot);
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawInfoVoshod(chatId);
+            }
+            else if (callbackData == "place_voshod_first")
+            {
+                await GettingUserChatId(bot);
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawPlaseVoshod(chatId);
+            }
+            else if (callbackData == "rest_back")
+            {
+                await GettingUserChatId(bot);
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawButtonFirst(chatId);
+            }
+            else if (callbackData == "voshod_back")
+            {
+                await GettingUserChatId(bot);
+                await bot.DeleteMessage(chatId, messageIdToDelete);
                 await DrawButtonVoshod(chatId);
             }
         }
@@ -178,8 +178,16 @@ namespace Bot
         {
             var keyboard1 = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("FloArt")},
-                new[] {InlineKeyboardButton.WithCallbackData("Восход")}
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"FloArt",
+                        callbackData:"floart")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Восход",
+                        callbackData:"voshod")}
 
             });
             await bot.SendTextMessageAsync(chatId, "Выберите заведение", replyMarkup: keyboard1);
@@ -189,10 +197,26 @@ namespace Bot
 
             var keyboard2 = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Меню FloArt")},
-                new[] {InlineKeyboardButton.WithCallbackData("Узнать больше о кофейне 'FloArt'")},
-                new[] {InlineKeyboardButton.WithCallbackData("Место нахождения FloArt")},
-                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору ресторана")}
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Меню FloArt",
+                        callbackData:"menu_floart")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Узнать больше о кофейне",
+                        callbackData:"info_floart_first")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Место нахождения",
+                        callbackData:"place_floart_first")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Вернуться к выбору ресторана",
+                        callbackData:"rest_back")}
 
 
             });
@@ -203,10 +227,26 @@ namespace Bot
         {
             var keyboard3 = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Меню Восход")},
-                new[] {InlineKeyboardButton.WithCallbackData("Узнать больше о кофейне 'Восход'")},
-                new[] {InlineKeyboardButton.WithCallbackData("Место положение кафе 'Восход'")},
-                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору ресторана")}
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Меню Восход",
+                        callbackData:"menu_voshod")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Узнать больше о кофейне 'Восход'",
+                        callbackData:"info_voshod_first")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Место положение кафе 'Восход'",
+                        callbackData:"place_voshod_first")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Вернуться к выбору ресторана",
+                        callbackData:"rest_back")}
 
 
             });
@@ -217,7 +257,9 @@ namespace Bot
             var keyboardFloArt = new InlineKeyboardMarkup(new[]
             {
                 new[] {InlineKeyboardButton.WithCallbackData("скоро тут появится меню кафе FloArt")},
-                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(FloArt)")}
+                new[] {InlineKeyboardButton.WithCallbackData(
+                    text:"Вернуться к выбору действия",
+                    callbackData:"floart_back")}
             });
 
             await bot.SendTextMessageAsync(chatId, "Выберите любую позицию", replyMarkup: keyboardFloArt);
@@ -227,18 +269,32 @@ namespace Bot
         {
             var keyboardVoshod = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("скоро тут появится меню кафе Восход")},
-                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(Восход)")}
+                new[] 
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text: "скоро тут появится меню кафе Восход", 
+                        callbackData: "voshod_menu_soon")
+                },
+                new[] 
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text: "Вернуться к выбору действия", 
+                        callbackData: "voshod_back")  
+                }
             });
 
-            await bot.SendTextMessageAsync(chatId, "Выберите любую позицию", replyMarkup: keyboardVoshod);
+            await bot.SendTextMessageAsync(chatId, "Выберите любую позицию.", replyMarkup: keyboardVoshod);
         }
 
         static async Task DrawInfoFLoArt(long chatId)
         {
             var keyboardFloArtInfo = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(FloArt)")}
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Вернуться к выбору действия",
+                        callbackData:"floart_back")}
             });
             await bot.SendTextMessageAsync(chatId, "Тут очень скоро появится информация о кофейне FloArt",replyMarkup: keyboardFloArtInfo);
         }
@@ -246,7 +302,11 @@ namespace Bot
         {
             var keyboardVoshodInfo = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Вернутся к выбору действия(Восход)")}
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Вернуться к выбору действия",
+                        callbackData:"voshod_back")}
             });
             await bot.SendTextMessageAsync(chatId, "Тут очень скоро появится информация о кофейне Восход",replyMarkup: keyboardVoshodInfo);
         }
@@ -255,7 +315,12 @@ namespace Bot
         {
             var keyboardPlaseFlo = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(FloArt)")}
+                new[] {InlineKeyboardButton.WithCallbackData("Найти FloArt на карте")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Вернуться к выбору действия(FloArt)",
+                        callbackData:"floart_back")}
             });
 
             await bot.SendTextMessageAsync(chatId, "Тут скоро будет место положение кофейни FLoArt", replyMarkup: keyboardPlaseFlo);
@@ -265,7 +330,12 @@ namespace Bot
         {
             var keyboardPlaseVoshod = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Вернуться к выбору действия(Восход)")}
+                new[] {InlineKeyboardButton.WithCallbackData("Найти Восход на карте")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(
+                        text:"Вернуться к выбору действия(Восход)",
+                        callbackData:"voshod_back")}
             });
 
             await bot.SendTextMessageAsync(chatId, "Тут очень скоро будет место положение кафе Восход", replyMarkup: keyboardPlaseVoshod);
