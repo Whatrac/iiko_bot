@@ -292,6 +292,12 @@ namespace Bot
             {
                 new[]
                 {
+                    InlineKeyboardButton.WithUrl(
+                        text:"Перейти на сайт с информацией",
+                        url:"https://www.flo-art.ru/#!/tab/817656526-1"
+                    )},
+                new[]
+                {
                     InlineKeyboardButton.WithCallbackData(
                         text:"Вернуться к выбору действия",
                         callbackData:"floart_back")}
@@ -315,15 +321,18 @@ namespace Bot
         {
             var keyboardPlaseFlo = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("Найти FloArt на карте")},
+                new[]
+                { InlineKeyboardButton.WithUrl(
+                    text:"Найти FloArt на карте",
+                    url:"https://yandex.ru/maps/-/CHXrUJix")},
                 new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        text:"Вернуться к выбору действия(FloArt)",
+                        text:"Вернуться к выбору действия",
                         callbackData:"floart_back")}
             });
 
-            await bot.SendTextMessageAsync(chatId, "Тут скоро будет место положение кофейни FLoArt", replyMarkup: keyboardPlaseFlo);
+            await bot.SendTextMessageAsync(chatId, "Вы можете построить маршрут до FloArt нажав кнопку", replyMarkup: keyboardPlaseFlo);
         }
 
         static async Task DrawPlaseVoshod(long chatId)
