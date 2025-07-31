@@ -20,7 +20,7 @@ namespace Bot
     internal class Work 
     {
 
-        private static TelegramBotClient bot = new("");
+        private static TelegramBotClient bot = new("*");
 
         private static CancellationTokenSource cts = new CancellationTokenSource();
         static public async Task Main()
@@ -293,7 +293,7 @@ namespace Bot
                 new[]
                 {
                     InlineKeyboardButton.WithUrl(
-                        text:"Перейти на сайт с информацией",
+                        text:"Перейти на наш сайт",
                         url:"https://www.flo-art.ru/#!/tab/817656526-1"
                     )},
                 new[]
@@ -302,7 +302,7 @@ namespace Bot
                         text:"Вернуться к выбору действия",
                         callbackData:"floart_back")}
             });
-            await bot.SendTextMessageAsync(chatId, "Тут очень скоро появится информация о кофейне FloArt",replyMarkup: keyboardFloArtInfo);
+            await bot.SendTextMessageAsync(chatId, "ФЛО АРТ — кофейня, где вы можете наслаждаться прекрасным ароматным кофе, вкусной едой и мастер-классами в атмосфере полного спокойствия среди живых цветов\nТак же у нас можно заказать цветы",replyMarkup: keyboardFloArtInfo);
         }
         static async Task DrawInfoVoshod(long chatId)
         {
