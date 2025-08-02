@@ -20,7 +20,7 @@ namespace Bot
     internal class Work 
     {
 
-        private static TelegramBotClient bot = new("*");
+        private static TelegramBotClient bot = new("");
 
         private static CancellationTokenSource cts = new CancellationTokenSource();
         static public async Task Main()
@@ -130,10 +130,34 @@ namespace Bot
                 await GettingUserChatId(bot);
                 await DrawPlaseFloArt(chatId);
             }
+            else if (callbackData == "kofe")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawKofeFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "espresso")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте");
+                await GettingUserChatId(bot);
+            }
             else if (callbackData == "floart_back")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await DrawButtonFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "floart_back_razdel")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawMenuFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "floart_back_kofe")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawKofeFloArt(chatId);
                 await GettingUserChatId(bot);
             }
             else if (callbackData == "voshod")
@@ -256,30 +280,150 @@ namespace Bot
         {
             var keyboardFloArt = new InlineKeyboardMarkup(new[]
             {
-                new[] {InlineKeyboardButton.WithCallbackData("скоро тут появится меню кафе FloArt")},
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Кофе",
+                        callbackData:"kofe"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Чай листовой",
+                        callbackData:"tea_list"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Сезонные напитки",
+                        callbackData:"seasonal_drinks"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Свежевыжатые соки",
+                        callbackData:"juice"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Лимонады",
+                        callbackData:"limonade"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Чай без чая",
+                        callbackData:"tea_not_tea"
+                    )
+                },
                 new[] {InlineKeyboardButton.WithCallbackData(
                     text:"Вернуться к выбору действия",
                     callbackData:"floart_back")}
             });
 
-            await bot.SendTextMessageAsync(chatId, "Выберите любую позицию", replyMarkup: keyboardFloArt);
+            await bot.SendTextMessageAsync(chatId, "Чтобы вы хотели взять?", replyMarkup: keyboardFloArt);
+        }
+
+        static async Task DrawKofeFloArt(long chatId)
+        {
+            var keyboardKofeFloArt = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Эспрессо",
+                        callbackData: "espresso"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Американо",
+                        callbackData:"amricano"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Капучино",
+                        callbackData: "capuchino"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Латте",
+                        callbackData: "latte"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Раф",
+                        callbackData:"raf"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Флет Уайт",
+                        callbackData: "flat"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Вернуться к выбору раздела",
+                        callbackData: "floart_back_razdel"
+                    )
+                }
+            });
+            bot.SendTextMessageAsync(chatId, "Выберите любой напиток", replyMarkup: keyboardKofeFloArt);
+        }
+        static async Task DrawSupplementsFloArt(long chatId)
+        {
+            var keyboardSupplementsFloArt = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Альтернативное молоко",
+                        callbackData: "alternativ_milk"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Сиропы",
+                        callbackData: "syrups"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Вернуться к выбору напитка",
+                        callbackData: "floart_back_kofe"
+                    )
+                }
+            });
         }
 
         static async Task DrawMenuVoshod(long chatId)
         {
             var keyboardVoshod = new InlineKeyboardMarkup(new[]
             {
-                new[] 
+                new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        text: "скоро тут появится меню кафе Восход", 
+                        text: "скоро тут появится меню кафе Восход",
                         callbackData: "voshod_menu_soon")
                 },
-                new[] 
+                new[]
                 {
                     InlineKeyboardButton.WithCallbackData(
-                        text: "Вернуться к выбору действия", 
-                        callbackData: "voshod_back")  
+                        text: "Вернуться к выбору действия",
+                        callbackData: "voshod_back")
                 }
             });
 
