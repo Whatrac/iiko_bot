@@ -136,10 +136,29 @@ namespace Bot
                 await DrawKofeFloArt(chatId);
                 await GettingUserChatId(bot);
             }
+            else if (callbackData == "tea_list")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawTeaListFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "fresh_juice")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawFreshFLoArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "seasonal_drinks")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawSeasonalDrinksFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
             else if (callbackData == "alternativ_milk")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
-                await bot.SendTextMessageAsync(chatId, "Альтернативное молоко добавят в заказ"); // доделать более расширеную версию написания пользователю его заказа, для этого нужно расширить кол-во функций 
+                await DrawAlternativMilkFloArt(chatId);
+                await GettingUserChatId(bot);
             }
             else if (callbackData == "espresso")
             {
@@ -177,7 +196,126 @@ namespace Bot
                 await DrawSupplementsFloArt(chatId);
                 await GettingUserChatId(bot);
             }
-
+            else if (callbackData == "assam")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "erl_grey")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "pyer")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "sencha")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "milk_ylyn")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "silver_tea")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "read_pole_cbor")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "power_of_nature")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "wild_cherry")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "berry_punch")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "fresh_apple")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "fresh_carrot")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "fresh_orange")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "fresh_grapefruit")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "mindal_milk")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "banana_milk")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "oat_milk")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "coconut_milk")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "lactose_free_milk")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "syrups") // в дальнейшем в идеале конечно добавить список сиропов, но хз как это сделать потому что там нету его нигде
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Сироп добавят в ваш напиток");
+                await GettingUserChatId(bot);
+            }
             else if (callbackData == "floart_back")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
@@ -194,6 +332,12 @@ namespace Bot
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await DrawKofeFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "floart_back_kofe_supplement")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawSupplementsFloArt(chatId);
                 await GettingUserChatId(bot);
             }
             else if (callbackData == "voshod")
@@ -345,7 +489,7 @@ namespace Bot
                     InlineKeyboardButton.WithCallbackData
                     (
                         text: "Свежевыжатые соки",
-                        callbackData:"juice"
+                        callbackData:"fresh_juice"
                     )
                 },
                 new[]
@@ -417,11 +561,169 @@ namespace Bot
                     InlineKeyboardButton.WithCallbackData
                     (
                         text:"Вернуться к выбору раздела",
-                        callbackData: "floart_back_razdel"
+                        callbackData: "floart_back_razdel" 
                     )
                 }
             });
-            bot.SendTextMessageAsync(chatId, "Выберите любой напиток", replyMarkup: keyboardKofeFloArt);
+            await bot.SendTextMessageAsync(chatId, "Выберите любой напиток", replyMarkup: keyboardKofeFloArt);
+        }
+        static async Task DrawTeaListFloArt(long chatId)
+        {
+            var keyboardTeaListFloArt = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Ассам",
+                        callbackData: "assam"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Эрл грей",
+                        callbackData: "erl_grey"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Пуэр",
+                        callbackData: "pyer"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Сенча",
+                        callbackData: "sencha"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Молочный улун",
+                        callbackData:"milk_ylyn"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Серебряный жасмин",
+                        callbackData: "silver_tea"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Краснополянский сбор",
+                        callbackData: "read_pole_cbor"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text: "Сила природы",
+                        callbackData: "power_of_nature"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Дикая Вишня",
+                        callbackData:"wild_cherry"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Ягодный пунш",
+                        callbackData:"berry_punch"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Вернуться к выбору раздела",
+                        callbackData:"floart_back_razdel"
+                    )
+                }
+            });
+            await bot.SendTextMessageAsync(chatId, "Выберите любой напиток", replyMarkup: keyboardTeaListFloArt);
+        }
+        static async Task DrawSeasonalDrinksFloArt(long chatId)
+        {
+            var keyboardSeasonalDrinks = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Чай клюква-облепиха",
+                        callbackData:"Cranberry-sea_buckthorn_tea"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Глинтвейн",
+                        callbackData:"mulled_wine"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Латте попкорн",
+                        callbackData:"latte_popkorn"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Вернуться к выбору раздела",
+                        callbackData:"floart_back_razdel"
+                    )
+                }
+
+            });
+            await bot.SendTextMessageAsync(chatId, "Предзаказа нету гг короче", replyMarkup: keyboardSeasonalDrinks);
+        }
+        static async Task DrawFreshFLoArt(long chatId)
+        {
+            var keyboardFreshFloArt = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Яблоко",
+                        callbackData:"fresh_apple"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Морковь",
+                        callbackData:"fresh_carrot"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Апельсин",
+                        callbackData:"fresh_orange"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Грейпфрут",
+                        callbackData:"fresh_grapefruit"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Вернуться к выбору раздела",
+                        callbackData:"floart_back_razdel"
+                    )
+                }
+            });
+            bot.SendTextMessageAsync(chatId, "Выберите любой напиток", replyMarkup: keyboardFreshFloArt);
         }
         static async Task DrawSupplementsFloArt(long chatId)
         {
@@ -457,6 +759,53 @@ namespace Bot
                     )
                 }
             });
+            await bot.SendTextMessageAsync(chatId, "Выберите любую добавку", replyMarkup: keyboardSupplementsFloArt);
+        }
+        static async Task DrawAlternativMilkFloArt(long chatId)
+        {
+            var keyboardAlternativMilkFloArt = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Минадльное",
+                        callbackData:"mindal_milk"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Банановое",
+                        callbackData:"banana_milk"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Овсяное",
+                        callbackData:"oat_milk"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Кокосовое",
+                        callbackData:"coconut_milk"
+                    ),
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Безлактозное",
+                        callbackData:"lactose_free_milk"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Вернуться к выбору добавки",
+                        callbackData:"floart_back_kofe_supplement"
+                    )
+                }
+            });
+            await bot.SendTextMessageAsync(chatId, "Выберите любое альтернативное молоко", replyMarkup: keyboardAlternativMilkFloArt);
         }
 
         static async Task DrawMenuVoshod(long chatId)
