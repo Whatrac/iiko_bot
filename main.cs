@@ -136,12 +136,48 @@ namespace Bot
                 await DrawKofeFloArt(chatId);
                 await GettingUserChatId(bot);
             }
+            else if (callbackData == "alternativ_milk")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Альтернативное молоко добавят в заказ"); // доделать более расширеную версию написания пользователю его заказа, для этого нужно расширить кол-во функций 
+            }
             else if (callbackData == "espresso")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
-                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте");
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
                 await GettingUserChatId(bot);
             }
+            else if (callbackData == "americano")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "capuchino")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawSupplementsFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "latte")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawSupplementsFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "raf")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
+            }
+            else if (callbackData == "flat")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await DrawSupplementsFloArt(chatId);
+                await GettingUserChatId(bot);
+            }
+
             else if (callbackData == "floart_back")
             {
                 await bot.DeleteMessage(chatId, messageIdToDelete);
@@ -195,6 +231,12 @@ namespace Bot
                 await GettingUserChatId(bot);
                 await bot.DeleteMessage(chatId, messageIdToDelete);
                 await DrawButtonVoshod(chatId);
+            }
+            else if (callbackData == "not_supplement")
+            {
+                await bot.DeleteMessage(chatId, messageIdToDelete);
+                await bot.SendTextMessageAsync(chatId, "Отличный выбор! Ваш заказ передам в предприятие. Оплата происходит на месте.\nЕсли вы хотите взять что-то еще напишите команду /start");
+                await GettingUserChatId(bot);
             }
         }
 
@@ -341,7 +383,7 @@ namespace Bot
                     InlineKeyboardButton.WithCallbackData
                     (
                         text:"Американо",
-                        callbackData:"amricano"
+                        callbackData:"americano"
                     )
                 },
                 new[]
@@ -396,6 +438,14 @@ namespace Bot
                     (
                         text: "Сиропы",
                         callbackData: "syrups"
+                    )
+                },
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData
+                    (
+                        text:"Мне не нужны никакие добавки",
+                        callbackData:"not_supplement"
                     )
                 },
                 new[]
